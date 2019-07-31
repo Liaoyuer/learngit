@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+  <script src="./Vue.js"></script>
+ </head>
+ <body>
+  <div id="root">
+	<div>
+	<input v-model="inputValue" /><button @click="handleSubmit">提交</button>
+	</div>
+	<ul>
+		<!-- <li v-for="(item,index) of list" :key="index">{{item}}</li> -->
+		<todo-item 
+		v-for="(item,index) of list" 
+		:key="index"
+		:content="item"
+		><!-- content="item"通过content传值给item -->
+		</todo-item>
+	<ul>
+	
+  </div>
+  <script>
+	Vue.component('todo-item',{//Vue.compontent 是定义一个全局组件
+		props:['content'],//定义函数接收从外面传进来的叫content的属性
+		template:"<li>{{content}}</li>"
+	})
+
+	//var TodoItem={//局部组件，要通过Vue实例里面调用
+		//template:"<li>item</li>"
+	//}
+	new Vue({
+		el:"#root",
+		//components:{//实例里面调用局部组件
+			//"todo-item":TodoItem
+		//},
+		data:{
+			list:[],
+			inputValue:''
+		},
+		methods:{
+			handleSubmit: function(){
+				this.list.push(this.inputValue),
+				this.inputValue=''
+			},
+		}
+	})
+  </script>
+ </body>
+</html>
