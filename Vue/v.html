@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+  <script src="./Vue.js"></script>
+ </head>
+ <body>
+  <div id="app">
+	  <div>
+		  <input v-model="inputValue"/>
+		  <button @click="handleSubmit">提交</button>
+	  </div>
+	  <div>
+		  <ol>
+			<todo-item 
+			v-for="(item,index) of list"
+			:key="index"
+			:content="item"
+			></todo-item>
+		  </ol>
+	  </div>
+	  <div >
+		<span v-html="msg1"></span>
+	  </div>
+	  <div>
+		我借你{{money}}你还我{{a}}还欠我{{b}}
+	  </div>
+  </div>
+  
+  <script type="text/javascript">
+  Vue.component("todo-item",{
+	  props:['content'],
+	  template:'<li>{{content}}</li>'
+  })
+  var app=new Vue({
+	  el:"#app",
+	  data:{
+		  list:[],
+		  inputValue:'',
+		  msg1:'<span style="color:red;">hello word</span>',
+		  money:100,
+		  a:1
+	  },
+	  methods:{
+		  handleSubmit: function(){
+			  this.list.push(this.inputValue)
+		  }
+		  },
+	  computed:{
+		  b:function(){
+			  return this.money-this.a
+		  }
+	  }
+  })
+  </script>
+ </body>
+</html>
